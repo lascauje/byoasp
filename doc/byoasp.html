@@ -1,0 +1,1313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-05-16 Tue 18:05 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Little Adventures in Wizard Programming</title>
+<meta name="author" content="lascauje" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="./export/config/org.css"/>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Little Adventures in Wizard Programming</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf4d8e23">Welcome</a></li>
+<li><a href="#org6876930">Reproducible Computations &amp; Literate Programming</a>
+<ul>
+<li><a href="#org16f0f7a">Environment Setup</a></li>
+<li><a href="#orgf650a58">Build &amp; Run</a></li>
+<li><a href="#org87b924b">Documentation Generation</a></li>
+<li><a href="#orgc58b063">References</a></li>
+</ul>
+</li>
+<li><a href="#orgec425e0">Automatic Differentiation, Symbolic Programming</a>
+<ul>
+<li><a href="#org23a9d1b">Newton's Method</a></li>
+<li><a href="#org1f3bde7">Taylor Series</a></li>
+<li><a href="#org3f8ad8c">Differentiation Source Code</a></li>
+<li><a href="#orge050c1a">Unit Tests</a></li>
+<li><a href="#org1666117">References</a></li>
+</ul>
+</li>
+<li><a href="#org985e120">The Art of the Propagation, Constraint-based Systems</a>
+<ul>
+<li><a href="#orgfc3ceef">Linear Equation</a></li>
+<li><a href="#org9b08cb3">Bernoulli Equation</a></li>
+<li><a href="#orgb3f3d07">Propagation Source Code</a></li>
+<li><a href="#orge5093f8">Unit Tests</a></li>
+<li><a href="#org6e257a0">References</a></li>
+</ul>
+</li>
+<li><a href="#org073ea1d">Amb Evaluator, Nondeterministic Computing</a>
+<ul>
+<li><a href="#orga09875b">Pythagorean Triples</a></li>
+<li><a href="#org0e08879">Advent of Code 2022, Day 15</a></li>
+<li><a href="#org91a2c1f">Amb Source Code</a></li>
+<li><a href="#orgce93b50">Unit Tests</a></li>
+<li><a href="#org6f1316c">References</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf4d8e23" class="outline-2">
+<h2 id="orgf4d8e23">Welcome</h2>
+<div class="outline-text-2" id="text-orgf4d8e23">
+<blockquote>
+<p>
+for People who <b>LOVE</b> to Program!<br />
+&#x2013; MIT 6.945
+</p>
+</blockquote>
+<p>
+The content is based on the books:
+</p>
+<ul class="org-ul">
+<li><a href="https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html">Structure and Interpretation of Computer Programs</a>. Harold Abelson &amp;
+Gerald Jay Sussman &amp; Julie Sussman. 1993.</li>
+<li><a href="https://mitpress.mit.edu/9780262045490/">Software Design for Flexibility</a>. Chris Hanson &amp; Gerald Jay
+Sussman. 2021.</li>
+</ul>
+
+<p>
+Code examples are in <code>GNU Guile</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-org6876930" class="outline-2">
+<h2 id="org6876930">Reproducible Computations &amp; Literate Programming</h2>
+<div class="outline-text-2" id="text-org6876930">
+<p>
+Be sure to get exactly the same results in the future (<code>GNU Guix</code>).<br />
+And treat a program as a piece of literature (<code>Emacs Org-mode</code>).
+</p>
+</div>
+<div id="outline-container-org16f0f7a" class="outline-3">
+<h3 id="org16f0f7a">Environment Setup</h3>
+<div class="outline-text-3" id="text-org16f0f7a">
+<p>
+Creates a new container from a specific version of <code>GNU Guix</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">guix time-machine --commit=d1aba42ad4e1909faa21d484975c5954c778e002 <span class="org-sh-escaped-newline">\</span>
+-- shell --container emacs emacs-htmlize guile
+</pre>
+</div>
+
+<p>
+Extracts source code and configuration files.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">emacs byoasp.org --batch --eval <span class="org-string">"(progn (require 'org) (org-babel-tangle))"</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf650a58" class="outline-3">
+<h3 id="orgf650a58">Build &amp; Run</h3>
+<div class="outline-text-3" id="text-orgf650a58">
+<p>
+Runs the unit tests.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">guile ./export/code/&lt;differentiation|propagation|amb&gt;.scm
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org87b924b" class="outline-3">
+<h3 id="org87b924b">Documentation Generation</h3>
+<div class="outline-text-3" id="text-org87b924b">
+<p>
+Generates this <code>HTML</code> documentation.
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">emacs byoasp.org --batch --eval <span class="org-sh-escaped-newline">\</span>
+<span class="org-string">"(progn (require 'org)</span>
+<span class="org-string">        (setq org-html-htmlize-output-type 'css)</span>
+<span class="org-string">        (setq org-html-postamble \"Made with &amp;#x3BB; by %a and powered by %c.\")</span>
+<span class="org-string">        (org-html-export-to-html))"</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc58b063" class="outline-3">
+<h3 id="orgc58b063">References</h3>
+<div class="outline-text-3" id="text-orgc58b063">
+<ul class="org-ul">
+<li>Konrad Hinsen. 2020. <a href="https://guix.gnu.org/en/blog/2020/reproducible-computations-with-guix/">Reproducible computations with Guix</a></li>
+<li>Donald E. Knuth. 1992. <a href="https://www-cs-faculty.stanford.edu/~knuth/lp.html">Literate Programming</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgec425e0" class="outline-2">
+<h2 id="orgec425e0">Automatic Differentiation, Symbolic Programming</h2>
+<div class="outline-text-2" id="text-orgec425e0">
+<p>
+Special historical significance in Lisp.
+</p>
+</div>
+<div id="outline-container-org23a9d1b" class="outline-3">
+<h3 id="org23a9d1b">Newton's Method</h3>
+<div class="outline-text-3" id="text-org23a9d1b">
+<p>
+A root-finding algorithm, defined as
+</p>
+
+\begin{align*}
+x_{n+1}=x_{n}-{\frac {f(x_{n})}{f'(x_{n})}}
+\end{align*}
+<div class="org-src-container">
+<pre class="src src-scheme" id="org1b7699c">(<span class="org-keyword">define</span> (<span class="org-function-name">close-enough?</span> x y tolerance) (&lt; (abs (- x y)) tolerance))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">root-newton</span> expr var initial-guess tolerance)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Hack around to define new functions from data!</span>
+  (<span class="org-keyword">let*</span> ((f (eval `(<span class="org-keyword">lambda</span> (,var) ,expr)
+                  (interaction-environment)))
+         (Df (eval `(<span class="org-keyword">lambda</span> (,var) ,(derivative expr var))
+                   (interaction-environment))))
+    (<span class="org-keyword">define</span> (<span class="org-function-name">improve-guess</span> xn)
+      (- xn (/ (f xn) (Df xn))))
+    (<span class="org-keyword">let</span> <span class="org-function-name">loop</span> ((xn initial-guess))
+      (<span class="org-keyword">let</span> ((xn+1 (improve-guess xn)))
+        (<span class="org-keyword">if</span> (close-enough? xn xn+1 tolerance)
+            xn+1
+            (loop xn+1))))))
+</pre>
+</div>
+
+<p>
+Let \(\cos\theta=\sin\theta\), how to find the angle \(\theta\)?
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme" id="org9b363f6">(root-newton '(- (cos theta) (sin theta)) 'theta 0.5 1e-8)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">.7853981633974484</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1f3bde7" class="outline-3">
+<h3 id="org1f3bde7">Taylor Series</h3>
+<div class="outline-text-3" id="text-org1f3bde7">
+<p>
+Approximation of a differentiable function, around a given point, by a
+polynomial.
+</p>
+
+\begin{align*}
+f(x)=f(a)+{\frac {f'(a)}{1!}}\,(x-a)+{\frac {f^{(2)}(a)}{2!}}\,(x-a)^{2}+\cdots +{\frac {f^{(n)}(a)}{n!}}\,(x-a)^{n}+R_{n}(x)
+\end{align*}
+
+<p>
+In the more compact sigma notation
+</p>
+\begin{align*}
+f(x)=\sum _{k=0}^{n}{\frac {f^{(k)}(a)}{k!}}\,(x-a)^{k}+R_{n}(x)
+\end{align*}
+<div class="org-src-container">
+<pre class="src src-scheme" id="org64c32e8">(<span class="org-keyword">define</span> (<span class="org-function-name">factorial</span> n)
+  (<span class="org-keyword">define</span> (<span class="org-function-name">factlp</span> count answer)
+    (<span class="org-keyword">if</span> (&gt; count n)
+        answer
+        (factlp (+ count 1) (* count answer))))
+  (factlp 1 1))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">derivative-n</span> expr var n)
+  (<span class="org-keyword">define</span> (<span class="org-function-name">derivlp</span> count answer)
+    (<span class="org-keyword">if</span> (&gt; count n)
+        answer
+        (derivlp (+ count 1) (derivative answer var))))
+  (derivlp 1 expr))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">taylor-c</span> k func a var)
+  `(* (/ ,(derivative-n func a k) ,(factorial k)) (expt (- ,var ,a) ,k)))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">taylor-s</span> n func a var)
+  (<span class="org-keyword">define</span> (<span class="org-function-name">taylorlp</span> count answer)
+    (<span class="org-keyword">if</span> (&gt; count n)
+        answer
+        (taylorlp (+ count 1)
+                  (append answer (list (taylor-c count func a var))))))
+  (taylorlp 1 `(+ (Rn ,var) ,func)))
+</pre>
+</div>
+
+<p>
+The polynomial of degree five for \(e^{a}\) is
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme" id="orgeec0ee7">(taylor-s 5 '(exp a) 'a 'x)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">'(+ (Rn x)</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">(exp a)</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">(* (/ (* 1 (exp a)) 1) (expt (- x a) 1))</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">(* (/ (* 1 (exp a)) 2) (expt (- x a) 2))</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">(* (/ (* 1 (exp a)) 6) (expt (- x a) 3))</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">(* (/ (* 1 (exp a)) 24) (expt (- x a) 4))</span>
+<span class="org-comment-delimiter">;;     </span><span class="org-comment">(* (/ (* 1 (exp a)) 120) (expt (- x a) 5)))</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3f8ad8c" class="outline-3">
+<h3 id="org3f8ad8c">Differentiation Source Code</h3>
+<div class="outline-text-3" id="text-org3f8ad8c">
+<div class="org-src-container">
+<pre class="src src-scheme" id="org136e82f"><span class="org-comment-delimiter">;; </span><span class="org-comment">Hack around to avoid "warning: possibly unbound"</span>
+(<span class="org-keyword">define</span> <span class="org-function-name">derivative</span> '())
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Define predicates</span>
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">=number?</span> expr num) (<span class="org-keyword">and</span> (number? expr) (= expr num)))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">variable?</span> x) (symbol? x))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">same-variable?</span> v1 v2)
+  (<span class="org-keyword">and</span> (variable? v1) (variable? v2) (eq? v1 v2)))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">func?</span> f expr) (eq? f (car expr)))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">sum?</span> x) (<span class="org-keyword">and</span> (pair? x) (eq? (car x) '+)))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">sub?</span> x) (<span class="org-keyword">and</span> (pair? x) (eq? (car x) '-)))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">product?</span> x) (<span class="org-keyword">and</span> (pair? x) (eq? (car x) '*)))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">quotient?</span> x) (<span class="org-keyword">and</span> (pair? x) (eq? (car x) '/)))
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Define helper functions</span>
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">addend</span> s) (cadr s))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">augend</span> s) (caddr s))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">multiplier</span> p) (cadr p))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">multiplicand</span> p) (caddr p))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">make-sum</span> a1 a2)
+  (<span class="org-keyword">cond</span> ((=number? a1 0) a2)
+        ((=number? a2 0) a1)
+        ((<span class="org-keyword">and</span> (number? a1) (number? a2)) (+ a1 a2))
+        (<span class="org-keyword">else</span> (list '+ a1 a2))))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">make-sub</span> a1 a2)
+  (<span class="org-keyword">cond</span> ((=number? a1 0) (- a2))
+        ((=number? a2 0) a1)
+        ((<span class="org-keyword">and</span> (number? a1) (number? a2)) (- a1 a2))
+        (<span class="org-keyword">else</span> (list '- a1 a2))))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">make-product</span> m1 m2)
+  (<span class="org-keyword">cond</span> ((<span class="org-keyword">or</span> (=number? m1 0) (=number? m2 0)) 0)
+        ((=number? m1 1) m2)
+        ((=number? m2 1) m1)
+        ((<span class="org-keyword">and</span> (number? m1) (number? m2)) (* m1 m2))
+        (<span class="org-keyword">else</span> (list '* m1 m2))))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">make-quotient</span> m1 m2)
+  (<span class="org-keyword">cond</span> ((=number? m2 0) +inf.0)
+        ((=number? m2 1) m1)
+        ((=number? m1 0) 0)
+        ((<span class="org-keyword">and</span> (number? m1) (number? m2)) (/ m1 m2))
+        (<span class="org-keyword">else</span> (list '/ m1 m2))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[u^n]' == u'*(n*u^(n-1))</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">expr == (expt u n)</span>
+(<span class="org-keyword">define</span> (<span class="org-function-name">deriv-expt</span> expr var)
+  (<span class="org-keyword">let</span> ((v (derivative (cadr expr) var)))
+    (<span class="org-keyword">if</span> (=number? v 0)
+        0
+        `(* ,v (* n (expt ,(cadr expr) (- ,(caddr expr) 1)))))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[sqrt(u)]' == u'/(2*sqrt(u))</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">expr == (sqrt 2)</span>
+(<span class="org-keyword">define</span> (<span class="org-function-name">deriv-sqrt</span> expr var)
+  (<span class="org-keyword">let</span> ((v (derivative (cadr expr) var)))
+    (<span class="org-keyword">if</span> (=number? v 0)
+        0
+        `(/ ,v (* 2 (sqrt ,(cadr expr)))))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[exp(u)]' == u'exp(u)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">expr == (exp u)</span>
+(<span class="org-keyword">define</span> (<span class="org-function-name">deriv-exp</span> expr var)
+  (<span class="org-keyword">let</span> ((v (derivative (cadr expr) var)))
+    (<span class="org-keyword">if</span> (=number? v 0)
+        0
+        `(* ,v (exp ,(cadr expr))))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[log(u)]' == u'/log(u)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">expr == (log u)</span>
+(<span class="org-keyword">define</span> (<span class="org-function-name">deriv-log</span> expr var)
+  (<span class="org-keyword">let</span> ((v (derivative (cadr expr) var)))
+    (<span class="org-keyword">if</span> (=number? v 0)
+        0
+        `(/ ,v ,(cadr expr)))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[cos(u)]' == u'cos(u)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">expr == (cos u)</span>
+(<span class="org-keyword">define</span> (<span class="org-function-name">deriv-sin</span> expr var)
+  (<span class="org-keyword">let</span> ((v (derivative (cadr expr) var)))
+    (<span class="org-keyword">cond</span> ((=number? v 0) 0)
+          ((=number? v 1) `(cos ,(cadr expr)))
+          (<span class="org-keyword">else</span> `(* ,v (cos ,(cadr expr)))))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">[sin(u)]' == -u'sin(u)</span>
+<span class="org-comment-delimiter">;; </span><span class="org-comment">expr == (sin u)</span>
+(<span class="org-keyword">define</span> (<span class="org-function-name">deriv-cos</span> expr var)
+  (<span class="org-keyword">let</span> ((v (derivative (cadr expr) var)))
+    (<span class="org-keyword">cond</span> ((=number? v 0) 0)
+          ((=number? v 1) `(- (sin ,(cadr expr))))
+          (<span class="org-keyword">else</span> `(* ,v (- (sin ,(cadr expr))))))))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Entry point</span>
+(<span class="org-keyword">define</span> (<span class="org-function-name">derivative</span> expr var)
+  (<span class="org-keyword">cond</span> ((number? expr) 0)
+        ((variable? expr) (<span class="org-keyword">if</span> (same-variable? expr var) 1 0))
+        ((sum? expr) (make-sum (derivative (addend expr) var)
+                               (derivative (augend expr) var)))
+        ((sub? expr) (make-sub (derivative (addend expr) var)
+                               (derivative (augend expr) var)))
+        ((product? expr)
+         (make-sum
+          (make-product (multiplier expr)
+                        (derivative (multiplicand expr) var))
+          (make-product (derivative (multiplier expr) var)
+                        (multiplicand expr))))
+        ((quotient? expr)
+         (make-quotient
+          (make-sub
+           (make-product (derivative (multiplier expr) var)
+                         (multiplicand expr))
+
+           (make-product (multiplier expr)
+                         (derivative (multiplicand expr) var)))
+          (make-product
+           (multiplicand expr)
+           (multiplicand expr))))
+        ((func? 'expt expr) (deriv-expt expr var))
+        ((func? 'sqrt expr) (deriv-sqrt expr var))
+        ((func? 'exp expr) (deriv-exp expr var))
+        ((func? 'log expr) (deriv-log expr var))
+        ((func? 'sin expr) (deriv-sin expr var))
+        ((func? 'cos expr) (deriv-cos expr var))
+        (<span class="org-keyword">else</span>
+         (error <span class="org-string">"unknown expression type: DERIV"</span> expr))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge050c1a" class="outline-3">
+<h3 id="orge050c1a">Unit Tests</h3>
+<div class="outline-text-3" id="text-orge050c1a">
+<div class="org-src-container">
+<pre class="src src-scheme" id="orge1e2ba1">(use-modules (srfi srfi-64))
+(test-begin <span class="org-string">"differentiation-test"</span>)
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Basic cases</span>
+(test-equal (derivative '10 'x) 0)
+(test-equal (derivative 'x 'y) 0)
+(test-equal (derivative 'x 'x) 1)
+(test-equal (derivative '(+ 10 x) 'x) 1)
+(test-equal (derivative '(- 12 x) 'x) -1)
+(test-equal (derivative '(* x 30) 'x) 30)
+(test-equal (derivative '(/ 1 0) 'x) +inf.0)
+(test-equal (derivative '(/ 99 x) 'x) '(/ -99 (* x x)))
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Function cases</span>
+(test-equal (derivative '(expt (* 2 x) n) 'x)
+            '(* 2 (* n (expt (* 2 x) (- n 1)))))
+(test-equal (derivative '(sqrt (* 2 x)) 'x) '(/ 2 (* 2 (sqrt (* 2 x)))))
+(test-equal (derivative '(exp (* 2 x)) 'x) '(* 2 (exp (* 2 x))))
+(test-equal (derivative '(log (* 2 x)) 'x) '(/ 2 (* 2 x)))
+(test-equal (derivative '(sin (* 2 y)) 'y) '(* 2 (cos (* 2 y))))
+(test-equal (derivative '(cos (* 2 y)) 'y) '(* 2 (- (sin (* 2 y)))))
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">More cases</span>
+(test-equal (derivative '(* x y) 'x) 'y)
+(test-equal (derivative '(* (* x y) (+ x 3)) 'x) '(+ (* x y) (* y (+ x 3))))
+(test-equal (derivative '(sin (/ (sqrt (+ (exp x) a)) 2)) 'x)
+            '(* (/ (* (/ (* 1 (exp x)) (* 2 (sqrt (+ (exp x) a)))) 2) 4)
+                (cos (/ (sqrt (+ (exp x) a)) 2))))
+(test-equal (derivative '(- (cos theta) (sin theta)) 'theta)
+            '(- (- (sin theta)) (cos theta)))
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Value cases</span>
+(test-approximate ((<span class="org-keyword">lambda</span> (x) (- (- (sin x)) (cos x))) 10)
+                  1.383092639965822
+                  0.001)
+(test-approximate ((eval `(<span class="org-keyword">lambda</span> (x) ,(derivative '(* x (cos x)) 'x))
+                         (interaction-environment)) 10)
+                  4.601139579817245
+                  0.001)
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Newton cases</span>
+(test-approximate (root-newton
+                   '(- (cos theta) (sin theta)) 'theta 0.5 1e-8)
+                  .7853981633974484
+                  0.001)
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Taylor cases</span>
+(test-equal (taylor-s 5 '(exp a) 'a 'x)
+            '(+ (Rn x)
+                (exp a)
+                (* (/ (* 1 (exp a)) 1) (expt (- x a) 1))
+                (* (/ (* 1 (exp a)) 2) (expt (- x a) 2))
+                (* (/ (* 1 (exp a)) 6) (expt (- x a) 3))
+                (* (/ (* 1 (exp a)) 24) (expt (- x a) 4))
+                (* (/ (* 1 (exp a)) 120) (expt (- x a) 5))))
+(test-approximate
+ (<span class="org-keyword">let*</span> ((Rn (<span class="org-keyword">lambda</span> (x) 0))
+        (taylor-fx
+         (<span class="org-keyword">lambda</span> (a)
+           (<span class="org-keyword">lambda</span> (x)
+             (+ (Rn x)
+                (exp a)
+                (* (/ (* 1 (exp a)) 1) (expt (- x a) 1))
+                (* (/ (* 1 (exp a)) 2) (expt (- x a) 2))
+                (* (/ (* 1 (exp a)) 6) (expt (- x a) 3))
+                (* (/ (* 1 (exp a)) 24) (expt (- x a) 4))
+                (* (/ (* 1 (exp a)) 120) (expt (- x a) 5)))))))
+   ((taylor-fx 10) 20)) 32547774.289459392 0.001)
+(test-approximate (<span class="org-keyword">let</span> ((a 2)
+                        (x 3)
+                        (Rn (<span class="org-keyword">lambda</span> (x) 0)))
+                    (+ (Rn x)
+                       (exp a)
+                       (* (/ (* 1 (exp a)) 1) (expt (- x a) 1))
+                       (* (/ (* 1 (exp a)) 2) (expt (- x a) 2))
+                       (* (/ (* 1 (exp a)) 6) (expt (- x a) 3))
+                       (* (/ (* 1 (exp a)) 24) (expt (- x a) 4))
+                       (* (/ (* 1 (exp a)) 120) (expt (- x a) 5))))
+                  20.073602402094934
+                  0.001)
+
+(test-end <span class="org-string">"differentiation-test"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1666117" class="outline-3">
+<h3 id="org1666117">References</h3>
+<div class="outline-text-3" id="text-org1666117">
+<ul class="org-ul">
+<li>Wikipedia Team. 2023. <a href="https://en.wikipedia.org/wiki/Newton%27s_method">Newton's Method</a></li>
+<li>Wikipedia Team. 2023. <a href="https://en.wikipedia.org/wiki/Taylor_series">Taylor Series</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org985e120" class="outline-2">
+<h2 id="org985e120">The Art of the Propagation, Constraint-based Systems</h2>
+<div class="outline-text-2" id="text-org985e120">
+<p>
+Design a program based on autonomous machines networks.
+</p>
+</div>
+<div id="outline-container-orgfc3ceef" class="outline-3">
+<h3 id="orgfc3ceef">Linear Equation</h3>
+<div class="outline-text-3" id="text-orgfc3ceef">
+<p>
+The following equation \(3x = 2 + y\) is represented as
+</p>
+<pre class="example" id="orgaea9db1">
+     ┌───────────────┐  ┌───────────────┐
+3 ───┤    W          │  │          Z    ├─── 2
+     │       *  U    ├──┤    U  +       │
+  ───┤    X          │  │          Y    ├───
+     └───────────────┘  └───────────────┘
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-scheme" id="org638b8db">(<span class="org-keyword">define</span> (<span class="org-function-name">equation-simple</span> x y)
+  (<span class="org-keyword">let</span> ((u (make-connector))
+        (w (make-connector))
+        (z (make-connector)))
+    (multiplier w x u)
+    (adder z y u)
+    (constant 3 w)
+    (constant 2 z)
+    'ok))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-scheme" id="org190222f">(<span class="org-keyword">let</span> ((X (make-connector))
+      (Y (make-connector)))
+  (equation-simple X Y)
+  (set-value! X 25 'user)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">y variable is automagically computed</span>
+  (get-value Y)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">73</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Reset</span>
+  (forget-value! X 'user)
+  (set-value! Y 212 'user)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">x variable is automagically computed</span>
+  (get-value X)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">214/3</span>
+  )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org9b08cb3" class="outline-3">
+<h3 id="org9b08cb3">Bernoulli Equation</h3>
+<div class="outline-text-3" id="text-org9b08cb3">
+<p>
+Can be useful to model a root (free) beer blueprints
+(see <a href="https://www.khanacademy.org/science/physics/fluids/fluid-dynamics/a/what-is-bernoullis-equation">What is Bernoulli's equation?</a>).
+</p>
+
+<p>
+The formula is
+</p>
+\begin{align*}
+P_{1} + \frac{1}{2} \rho v_{1}^{2} + \rho g h_{1} = P_{2} + \frac{1}{2} \rho v_{2}^{2} + \rho g h_{2}
+\end{align*}
+
+<p>
+And the system of propagation is
+</p>
+<pre class="example" id="org1ea7d71">
+                       ┌──────────────────────────────────────────────────────┐
+                       │                                                      │
+                       │  ┌───────────────┐  ┌───────────────┐                │
+                       └──┤    c6         │  │          P1   ├───             │
+                          │       +  c7   ├──┤    c7  +      │              ┌─┼─┐
+                       ┌──┤    c4         │  │          c8   ├──────────────┘ │ └────────┐
+                       │  └───────────────┘  └───────────────┘                │          │
+                       │                                                      │          │
+                       └──────────────┐                                     ┌─┼─┐      ┌─┼─┐
+                                      │       ┌─────────────────────────────┘ │ └──────┘ │ └─┐
+                                      │       │                               │          │   │
+       ┌───────────────┐  ┌───────────┴───┐   │ ┌───────────────┐ ┌───────────┴───┐      │   │
+1/2 ───┤    c1         │  │          c4   │  ─┴─┤    g          │ │          c6   │      │   │
+       │       *  c3   ├──┤    c3  *      │     │       *  c5   ├─┤    c5  *      │      │   │
+    ───┤    rho        │  │          v1-s │     │    rho        │ │          h1   ├───   │   │
+       └────┬──────────┘  └────────────┬──┘     └─────┬─────────┘ └───────────────┘      │   │
+            │                          │              │                                  │   │
+            │                                         │                                  │   │
+   ┌────────┴─────────────────────────────────────────┘                                  │   │
+   │                                                                                     │   │
+   │                                                                                     │   │
+   │                  ┌────────────────────────────────────────────────────────┐         │   │
+   │                  │                                                        │         │   │
+   │                  │   ┌───────────────┐  ┌───────────────┐               ┌─┼─┐       │   │
+   │                  └───┤    c12        │  │          c8   ├───────────────┘ │ └───────┘   │
+   │                      │       +  c13  ├──┤    c13  +     │                 │             │
+   │                  ┌───┤    c10        │  │          P2   ├───              │             │
+   │                  │   └───────────────┘  └───────────────┘                 │             │
+   │                  │                                                        │             │
+   │                  │                                                      ┌─┼─┐           │
+   │        1/2       └───────────────┐       ┌──────────────────────────────┘ │ └───────────┘
+   │         │                        │       │                                │
+   │   ┌─────┴─────────┐  ┌───────────┴───┐   │ ┌───────────────┐  ┌───────────┴───┐
+   │   │    c2         │  │          c10  │   └─┤    g          │  │          c12  │
+   │   │       *  c9   ├──┤    c9  *      │     │       *  c11  ├──┤    c11  *     │
+   └───┤    rho        │  │          v2-s │     │    rho        │  │          h2   ├───
+       └─────┬─────────┘  └───────────┬───┘     └──────┬────────┘  └───────────────┘
+             │                        │                │
+             │                                         │
+             └─────────────────────────────────────────┘
+</pre>
+<div class="org-src-container">
+<pre class="src src-scheme" id="org82956ab">(<span class="org-keyword">define</span> (<span class="org-function-name">equation-bernoulli</span> P1 rho v1-square g h1 P2 v2-square h2)
+  (<span class="org-keyword">let</span> ((c1 (make-connector))
+        (c2 (make-connector))
+        (c3 (make-connector))
+        (c4 (make-connector))
+        (c5 (make-connector))
+        (c6 (make-connector))
+        (c7 (make-connector))
+        (c8 (make-connector))
+        (c9 (make-connector))
+        (c10 (make-connector))
+        (c11 (make-connector))
+        (c12 (make-connector))
+        (c13 (make-connector)))
+    (constant 1/2 c1)
+    (constant 1/2 c2)
+
+    (multiplier c1 rho c3)
+    (multiplier v1-square c3 c4)
+    (multiplier rho g c5)
+    (multiplier h1 c5 c6)
+    (adder c4 c6 c7)
+    (adder P1 c7 c8)
+
+    (multiplier c2 rho c9)
+    (multiplier v2-square c9 c10)
+    (multiplier rho g c11)
+    (multiplier h2 c11 c12)
+    (adder c10 c12 c13)
+    <span class="org-comment-delimiter">;; </span><span class="org-comment">c8 constrains the value to the left</span>
+    (adder P2 c13 c8)
+    'ok))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-scheme" id="orgeeb79ee">(<span class="org-keyword">let</span> ((P1 (make-connector))
+      (rho (make-connector))
+      (v1-square (make-connector))
+      (g (make-connector))
+      (h1 (make-connector))
+      (P2 (make-connector))
+      (v2-square (make-connector))
+      (h2 (make-connector)))
+  (equation-bernoulli P1 rho v1-square g h1 P2 v2-square h2)
+
+  <span class="org-comment-delimiter">;;;; </span><span class="org-comment">Set variables</span>
+  (set-value! P1 12300 'user)
+  (set-value! rho 1090 'user)
+  (set-value! v1-square (* 3.0 3.0) 'user)
+  (set-value! g 9.8 'user)
+  (set-value! h1 0 'user)
+  (set-value! v2-square (* 0.75 0.75) 'user)
+  (set-value! h2 1.20 'user)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">P2 variable is automagically computed</span>
+  (get-value P2)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">4080.0375</span>
+
+  <span class="org-comment-delimiter">;;;; </span><span class="org-comment">Reset</span>
+  (forget-value! P1 'user)
+  (forget-value! rho 'user)
+  (forget-value! v1-square 'user)
+  (forget-value! g 'user)
+  (forget-value! h1 'user)
+  (forget-value! P2 'user)
+  (forget-value! v2-square 'user)
+  (forget-value! h2 'user)
+
+  <span class="org-comment-delimiter">;;;; </span><span class="org-comment">Set variables</span>
+  (set-value! rho 1000 'user)
+  (set-value! v1-square (* 3.56 3.56) 'user)
+  (set-value! g 9.8 'user)
+  (set-value! h1 0 'user)
+  (set-value! P2 0 'user)
+  (set-value! v2-square (* 32 32) 'user)
+  (set-value! h2 9.75 'user)
+
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">P1 variable is automagically computed</span>
+  (get-value P1)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">601213.2</span>
+  )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb3f3d07" class="outline-3">
+<h3 id="orgb3f3d07">Propagation Source Code</h3>
+<div class="outline-text-3" id="text-orgb3f3d07">
+<div class="org-src-container">
+<pre class="src src-scheme" id="org18f4dbd">(<span class="org-keyword">define</span> (<span class="org-function-name">connect</span> connector new-constraint)
+  ((connector 'connect) new-constraint))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">has-value?</span> connector)
+  (connector 'has-value?))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">get-value</span> connector)
+  (connector 'value))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">set-value!</span> connector new-value informant)
+  ((connector 'set-value!) new-value informant))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">forget-value!</span> connector retractor)
+  ((connector 'forget) retractor))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">inform-about-value</span> constraint)
+  (constraint 'I-have-a-value))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">inform-about-no-value</span> constraint)
+  (constraint 'I-lost-my-value))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">constant</span> value connector)
+  (<span class="org-keyword">define</span> (<span class="org-function-name">me</span> request)
+    (error <span class="org-string">"Unknown request: CONSTANT"</span> request))
+  (connect connector me)
+  (set-value! connector value me)
+  me)
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">for-each-except</span> exception procedure list)
+  (<span class="org-keyword">define</span> (<span class="org-function-name">loop</span> items)
+    (<span class="org-keyword">cond</span> ((null? items) 'done)
+          ((eq? (car items) exception) (loop (cdr items)))
+          (<span class="org-keyword">else</span> (procedure (car items))
+                (loop (cdr items)))))
+  (loop list))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">adder</span> a1 a2 sum)
+  (<span class="org-keyword">define</span> (<span class="org-function-name">process-new-value</span>)
+    (<span class="org-keyword">cond</span> ((<span class="org-keyword">and</span> (has-value? a1) (has-value? a2))
+           (set-value! sum
+                       (+ (get-value a1) (get-value a2))
+                       me))
+          ((<span class="org-keyword">and</span> (has-value? a1) (has-value? sum))
+           (set-value! a2
+                       (- (get-value sum) (get-value a1))
+                       me))
+          ((<span class="org-keyword">and</span> (has-value? a2) (has-value? sum))
+           (set-value! a1
+                       (- (get-value sum) (get-value a2))
+                       me))))
+  (<span class="org-keyword">define</span> (<span class="org-function-name">process-forget-value</span>)
+    (forget-value! sum me)
+    (forget-value! a1 me)
+    (forget-value! a2 me)
+    (process-new-value))
+  (<span class="org-keyword">define</span> (<span class="org-function-name">me</span> request)
+    (<span class="org-keyword">cond</span> ((eq? request 'I-have-a-value) (process-new-value))
+          ((eq? request 'I-lost-my-value) (process-forget-value))
+          (<span class="org-keyword">else</span> (error <span class="org-string">"Unknown request: ADDER"</span> request))))
+  (connect a1 me)
+  (connect a2 me)
+  (connect sum me)
+  me)
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">multiplier</span> m1 m2 product)
+  (<span class="org-keyword">define</span> (<span class="org-function-name">process-new-value</span>)
+    (<span class="org-keyword">cond</span> ((<span class="org-keyword">or</span> (<span class="org-keyword">and</span> (has-value? m1) (= (get-value m1) 0))
+               (<span class="org-keyword">and</span> (has-value? m2) (= (get-value m2) 0)))
+           (set-value! product 0 me))
+          ((<span class="org-keyword">and</span> (has-value? m1) (has-value? m2))
+           (set-value! product
+                       (* (get-value m1) (get-value m2))
+                       me))
+          ((<span class="org-keyword">and</span> (has-value? product) (has-value? m1))
+           (set-value! m2
+                       (/ (get-value product)
+                          (get-value m1))
+                       me))
+          ((<span class="org-keyword">and</span> (has-value? product) (has-value? m2))
+           (set-value! m1
+                       (/ (get-value product)
+                          (get-value m2))
+                       me))))
+  (<span class="org-keyword">define</span> (<span class="org-function-name">process-forget-value</span>)
+    (forget-value! product me)
+    (forget-value! m1 me)
+    (forget-value! m2 me)
+    (process-new-value))
+  (<span class="org-keyword">define</span> (<span class="org-function-name">me</span> request)
+    (<span class="org-keyword">cond</span> ((eq? request 'I-have-a-value) (process-new-value))
+          ((eq? request 'I-lost-my-value) (process-forget-value))
+          (<span class="org-keyword">else</span> (error <span class="org-string">"Unknown request: MULTIPLIER"</span>
+                       request))))
+  (connect m1 me)
+  (connect m2 me)
+  (connect product me)
+  me)
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">make-connector</span>)
+  (<span class="org-keyword">let</span> ((value #f) (informant #f) (constraints '()))
+    (<span class="org-keyword">define</span> (<span class="org-function-name">set-my-value</span> newval setter)
+      (<span class="org-keyword">cond</span> ((not (has-value? me))
+             (set! value newval)
+             (set! informant setter)
+             (for-each-except setter
+                              inform-about-value
+                              constraints))
+            ((not (= value newval))
+             (error <span class="org-string">"Contradiction"</span> (list value newval)))
+            (<span class="org-keyword">else</span> 'ignored)))
+    (<span class="org-keyword">define</span> (<span class="org-function-name">forget-my-value</span> retractor)
+      (<span class="org-keyword">if</span> (eq? retractor informant)
+          (<span class="org-keyword">begin</span> (set! informant #f)
+                 (for-each-except retractor
+                                  inform-about-no-value
+                                  constraints))
+          'ignored))
+    (<span class="org-keyword">define</span> (<span class="org-function-name">connect</span> new-constraint)
+      (<span class="org-keyword">if</span> (not (memq new-constraint constraints))
+          (set! constraints
+                (cons new-constraint constraints)))
+      (<span class="org-keyword">if</span> (has-value? me)
+          (inform-about-value new-constraint))
+      'done)
+    (<span class="org-keyword">define</span> (<span class="org-function-name">me</span> request)
+      (<span class="org-keyword">cond</span> ((eq? request 'has-value?)
+             (<span class="org-keyword">if</span> informant #t #f))
+            ((eq? request 'value) value)
+            ((eq? request 'set-value!) set-my-value)
+            ((eq? request 'forget) forget-my-value)
+            ((eq? request 'connect) connect)
+            (<span class="org-keyword">else</span> (error <span class="org-string">"Unknown operation: CONNECTOR"</span>
+                         request))))
+    me))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orge5093f8" class="outline-3">
+<h3 id="orge5093f8">Unit Tests</h3>
+<div class="outline-text-3" id="text-orge5093f8">
+<div class="org-src-container">
+<pre class="src src-scheme" id="orge312b88">(use-modules (srfi srfi-64))
+(test-begin <span class="org-string">"propagation-test"</span>)
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Simple cases</span>
+(<span class="org-keyword">let</span> ((X (make-connector))
+      (Y (make-connector)))
+  (equation-simple X Y)
+  (set-value! X 25 'user)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">y variable is automagically computed</span>
+  (test-equal (get-value Y) 73)
+  (forget-value! X 'user)
+  (set-value! Y 212 'user)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">x variable is automagically computed</span>
+  (test-equal (get-value X) 214/3))
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Bernoulli cases</span>
+(<span class="org-keyword">let</span> ((P1 (make-connector))
+      (rho (make-connector))
+      (v1-square (make-connector))
+      (g (make-connector))
+      (h1 (make-connector))
+      (P2 (make-connector))
+      (v2-square (make-connector))
+      (h2 (make-connector)))
+  (equation-bernoulli P1 rho v1-square g h1 P2 v2-square h2)
+  (set-value! P1 12300 'user)
+  (set-value! rho 1090 'user)
+  (set-value! v1-square (* 3.0 3.0) 'user)
+  (set-value! g 9.8 'user)
+  (set-value! h1 0 'user)
+  (set-value! v2-square (* 0.75 0.75) 'user)
+  (set-value! h2 1.20 'user)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">P2 variable is automagically computed</span>
+  (test-approximate (get-value P2) 4080.0375 0.001)
+  (forget-value! P1 'user)
+  (forget-value! rho 'user)
+  (forget-value! v1-square 'user)
+  (forget-value! g 'user)
+  (forget-value! h1 'user)
+  (forget-value! P2 'user)
+  (forget-value! v2-square 'user)
+  (forget-value! h2 'user)
+  (set-value! rho 1000 'user)
+  (set-value! v1-square (* 3.56 3.56) 'user)
+  (set-value! g 9.8 'user)
+  (set-value! h1 0 'user)
+  (set-value! P2 0 'user)
+  (set-value! v2-square (* 32 32) 'user)
+  (set-value! h2 9.75 'user)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">P1 variable is automagically computed</span>
+  (test-approximate (get-value P1) 601213.2 0.001))
+
+(test-end <span class="org-string">"propagation-test"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6e257a0" class="outline-3">
+<h3 id="org6e257a0">References</h3>
+<div class="outline-text-3" id="text-org6e257a0">
+<ul class="org-ul">
+<li>Khan Academy. 2017. <a href="https://www.khanacademy.org/science/physics/fluids/fluid-dynamics/a/what-is-bernoullis-equation">What is Bernoulli's equation?</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org073ea1d" class="outline-2">
+<h2 id="org073ea1d">Amb Evaluator, Nondeterministic Computing</h2>
+<div class="outline-text-2" id="text-org073ea1d">
+<p>
+The famous McCarthy's Ambiguous Operator!<br />
+The main idea is to search using backtracking and dependencies.
+</p>
+</div>
+<div id="outline-container-orga09875b" class="outline-3">
+<h3 id="orga09875b">Pythagorean Triples</h3>
+<div class="outline-text-3" id="text-orga09875b">
+<p>
+It consists of three positive integers, such that \(a^{2} + b^{2} = c^{2}\)
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme" id="orgb220eec">(<span class="org-keyword">define</span> (<span class="org-function-name">a-pythagorean-triple-between</span> low high)
+  (<span class="org-keyword">let</span> ((i (an-integer-between low high)))
+    (<span class="org-keyword">let</span> ((j (an-integer-between i high)))
+      (<span class="org-keyword">let</span> ((k (an-integer-between j high)))
+        (require (= (+ (* i i) (* j j)) (* k k)))
+        (list i j k)))))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-scheme" id="org6b6d551">(a-pythagorean-triple-between 2 10)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(3 4 5)</span>
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">Next triples</span>
+(amb)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(6 8 10)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e08879" class="outline-3">
+<h3 id="org0e08879">Advent of Code 2022, Day 15</h3>
+<div class="outline-text-3" id="text-org0e08879">
+<p>
+Part one asks for how many positions cannot contain a beacon
+(see <a href="https://adventofcode.com/2022/day/15">Day 15</a>).
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme" id="orgf6523e9">(<span class="org-keyword">define</span> <span class="org-function-name">sensors-report</span> '(((2 18) (-2 15))
+                         ((9 16) (10 16))
+                         ((13 2) (15 3))
+                         ((12 14) (10 16))
+                         ((10 20) (10 16))
+                         ((14 17) (10 16))
+                         ((8 7) (2 10))
+                         ((2 0) (2 10))
+                         ((0 11) (2 10))
+                         ((20 14) (25 17))
+                         ((17 20) (21 22))
+                         ((16 7) (15 3))
+                         ((14 3) (15 3))
+                         ((20 1) (15 3))))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">manhattan-distance</span> x1 y1 x2 y2)
+  (+ (abs (- x1 x2))
+     (abs (- y1 y2))))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">beacon-possible-require</span> x y)
+  (<span class="org-keyword">define</span> (<span class="org-function-name">helper</span> sr)
+    (<span class="org-keyword">let</span> ((sensor-x (car (car sr)))
+          (sensor-y (cadr (car sr)))
+          (beacon-x (car (cadr sr)))
+          (beacon-y (cadr (cadr sr))))
+      (require (&gt; (manhattan-distance sensor-x
+                                      sensor-y
+                                      x
+                                      y)
+                  (manhattan-distance sensor-x
+                                      sensor-y
+                                      beacon-x
+                                      beacon-y)))))
+  helper)
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">beacon-possible</span> x-low x-high y-low y-high)
+  (<span class="org-keyword">let</span> ((x (an-integer-between x-low x-high)))
+    (<span class="org-keyword">let</span> ((y (an-integer-between y-low y-high)))
+      (<span class="org-keyword">map</span> (beacon-possible-require x y) sensors-report)
+      (list x y))))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">beacon-all-nb</span> x-low x-high y-low y-high)
+  (* (+ (abs x-low) (abs x-high))
+     (+ (- y-high y-low) 1)))
+
+(<span class="org-keyword">define</span> <span class="org-function-name">beacon-possible-nb</span> 0)
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">beacon-possible-search!</span> x-low x-high y-low y-high)
+  (set! beacon-possible-nb 0)
+  (beacon-possible x-low x-high y-low y-high)
+  (set! beacon-possible-nb (+ beacon-possible-nb 1))
+  (amb))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-scheme" id="orgc8b5e7a">(beacon-possible-search! -4 26 10 10)
+
+beacon-possible-nb
+<span class="org-comment-delimiter">;; </span><span class="org-comment">4</span>
+
+(- (beacon-all-nb -4 26 10 10) beacon-possible-nb)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">26</span>
+</pre>
+</div>
+
+<p>
+In part two, the goal is to find the hidden beacons.
+</p>
+<div class="org-src-container">
+<pre class="src src-scheme" id="org1f7245e">(beacon-possible 0 20 0 20)
+<span class="org-comment-delimiter">;; </span><span class="org-comment">(14 11)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org91a2c1f" class="outline-3">
+<h3 id="org91a2c1f">Amb Source Code</h3>
+<div class="outline-text-3" id="text-org91a2c1f">
+<div class="org-src-container">
+<pre class="src src-scheme" id="org70daa0c">(<span class="org-keyword">define</span> (<span class="org-function-name">*failure*</span>) (error <span class="org-string">"Failure"</span>))
+
+<span class="org-comment-delimiter">;; </span><span class="org-comment">The *magical* part (call/cc and macros)</span>
+(<span class="org-keyword">define-syntax</span> <span class="org-variable-name">amb</span>
+  (<span class="org-keyword">syntax-rules</span> ()
+    ((amb) (*failure*))
+    ((amb ?x) ?x)
+    ((amb ?x ?y)
+     (<span class="org-keyword">let</span> ((old-failure *failure*))
+       ((<span class="org-keyword">call-with-current-continuation</span>
+         (<span class="org-keyword">lambda</span> (cc)
+           (set! *failure*
+                 (<span class="org-keyword">lambda</span> ()
+                   (set! *failure* old-failure)
+                   (cc (<span class="org-keyword">lambda</span> () ?y))))
+           (<span class="org-keyword">lambda</span> () ?x))))))
+    ((amb ?x ?rest ...)
+     (amb ?x (amb ?rest ...)))))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">require</span> p)
+  (<span class="org-keyword">if</span> (not p) (amb) 'ok))
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">an-integer-between</span> low high)
+  (require (&lt;= low high))
+  (amb low (an-integer-between (+ low 1) high)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgce93b50" class="outline-3">
+<h3 id="orgce93b50">Unit Tests</h3>
+<div class="outline-text-3" id="text-orgce93b50">
+<div class="org-src-container">
+<pre class="src src-scheme" id="orgd290437">(use-modules (srfi srfi-64))
+(test-begin <span class="org-string">"amb-test"</span>)
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Pythagorean cases</span>
+(test-equal (a-pythagorean-triple-between 2 10) '(3 4 5))
+
+<span class="org-comment-delimiter">;;;; </span><span class="org-comment">Beacon cases</span>
+(test-equal (manhattan-distance 8 7 2 10) 9)
+(test-equal (beacon-possible 0 20 0 20) '(14 11))
+(test-equal (beacon-all-nb -4 26 10 10) 30)
+(test-equal (beacon-possible -4 26 10 10) '(-4 10))
+
+(test-end <span class="org-string">"amb-test"</span>)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org6f1316c" class="outline-3">
+<h3 id="org6f1316c">References</h3>
+<div class="outline-text-3" id="text-org6f1316c">
+<ul class="org-ul">
+<li>Wiki Team. 2013. <a href="https://wiki.c2.com/?AmbSpecialForm">Amb Special Form</a>.</li>
+<li>Advent of Code Team. 2022. <a href="https://adventofcode.com/2022/day/15">Beacon Exclusion Zone</a>.</li>
+<li>blind00. 2022. <a href="https://github.com/blin00/advent-of-code/blob/master/2022/day15.py">day15.py</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+Made with &#x3BB; by lascauje and powered by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 28.2 (<a href="https://orgmode.org">Org</a> mode 9.5.5).
+</div>
+</body>
+</html>
